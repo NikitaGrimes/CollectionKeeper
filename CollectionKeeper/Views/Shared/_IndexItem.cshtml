@@ -1,0 +1,160 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model IndexItemModel
+
+@for (int i = 0; i < Model.CollectionItems.Count; i++)
+{
+    <tr>
+        <td>
+            <label>@Model.CollectionItems[i].Name</label>
+        </td>
+        <td>
+            @foreach (var tag in Model.CollectionItems[i].Tags)
+            {
+                <label>@tag.Name</label>
+            }
+        </td>
+        @if (Model.Collection.NumberNameField_1 != null && Model.Collection.NumberNameField_1 != String.Empty)
+        {
+            <td>
+                @if(Model.CollectionItems[i].NumberValueField_1 != null)
+                {
+                    <label>@Model.CollectionItems[i].NumberValueField_1.Value.ToString().TrimEnd('0').TrimEnd(',').TrimEnd('.')</label>
+                }
+            </td>
+        }
+        @if (Model.Collection.NumberNameField_2 != null && Model.Collection.NumberNameField_2 != String.Empty)
+        {
+            <td>
+                @if (Model.CollectionItems[i].NumberValueField_2 != null)
+                {
+                    <label>@Model.CollectionItems[i].NumberValueField_2.Value.ToString().TrimEnd('0').TrimEnd(',').TrimEnd('.')</label>
+                }
+            </td>
+        }
+        @if (Model.Collection.NumberNameField_3 != null && Model.Collection.NumberNameField_3 != String.Empty)
+        {
+            <td>
+                @if (Model.CollectionItems[i].NumberValueField_3 != null)
+                {
+                    <label>@Model.CollectionItems[i].NumberValueField_3.Value.ToString().TrimEnd('0').TrimEnd(',').TrimEnd('.')</label>
+                }
+            </td>
+        }
+        @if (Model.Collection.StringNameField_1 != null && Model.Collection.StringNameField_1 != String.Empty)
+        {
+            <td>
+                <label class="text-break">@Model.CollectionItems[i].StringValueField_1</label>
+            </td>
+        }
+        @if (Model.Collection.StringNameField_2 != null && Model.Collection.StringNameField_2 != String.Empty)
+        {
+            <td>
+                <label class="text-break">@Model.CollectionItems[i].StringValueField_2</label>
+            </td>
+        }
+        @if (Model.Collection.StringNameField_3 != null && Model.Collection.StringNameField_3 != String.Empty)
+        {
+            <td>
+                <label class="text-break">@Model.CollectionItems[i].StringValueField_3</label>
+            </td>
+        }
+        @if (Model.Collection.TextNameField_1 != null && Model.Collection.TextNameField_1 != String.Empty)
+        {
+            <td>
+                <div class="text-break">
+                    <markdown>
+                        @Model.CollectionItems[i].TextValueField_1
+                    </markdown>
+                </div>
+            </td>
+        }
+        @if (Model.Collection.TextNameField_2 != null && Model.Collection.TextNameField_2 != String.Empty)
+        {
+            <td>
+                <div class="text-break">
+                    <markdown>
+                        @Model.CollectionItems[i].TextValueField_2
+                    </markdown>
+                </div>
+            </td>
+        }
+        @if (Model.Collection.TextNameField_3 != null && Model.Collection.TextNameField_3 != String.Empty)
+        {
+            <td>
+                <div class="text-break">
+                    <markdown>
+                        @Model.CollectionItems[i].TextValueField_3
+                    </markdown>
+                </div>
+            </td>
+        }
+        @if (Model.Collection.DateNameField_1 != null && Model.Collection.DateNameField_1 != String.Empty)
+        {
+            <td>
+                @if (Model.Collection.IsHasTime_1)
+                {
+                    <label>@Model.CollectionItems[i].DateValueField_1.Value.ToString("ddd, dd MMM yyy HH:mm")</label>
+                }
+                else
+                {
+                    <label>@Model.CollectionItems[i].DateValueField_1.Value.ToString("ddd, dd MMM yyy")</label>
+                }
+            </td>
+        }
+        @if (Model.Collection.DateNameField_2 != null && Model.Collection.DateNameField_2 != String.Empty)
+        {
+            <td>
+                @if (Model.Collection.IsHasTime_2)
+                {
+                    <label>@Model.CollectionItems[i].DateValueField_2.Value.ToString("ddd, dd MMM yyy HH:mm")</label>
+                }
+                else
+                {
+                    <label>@Model.CollectionItems[i].DateValueField_2.Value.ToString("ddd, dd MMM yyy")</label>
+                }
+            </td>
+        }
+        @if (Model.Collection.DateNameField_3 != null && Model.Collection.DateNameField_3 != String.Empty)
+        {
+            <td>
+                @if (Model.Collection.IsHasTime_3)
+                {
+                    <label>@Model.CollectionItems[i].DateValueField_3.Value.ToString("ddd, dd MMM yyy HH:mm")</label>
+                }
+                else
+                {
+                    <label>@Model.CollectionItems[i].DateValueField_3.Value.ToString("ddd, dd MMM yyy")</label>
+                }
+            </td>
+        }
+        @if (Model.Collection.BoolNameField_1 != null && Model.Collection.BoolNameField_1 != String.Empty)
+        {
+            <td>
+                <label>@Model.CollectionItems[i].BoolValueField_1</label>
+            </td>
+        }
+        @if (Model.Collection.BoolNameField_2 != null && Model.Collection.BoolNameField_2 != String.Empty)
+        {
+            <td>
+                <label>@Model.CollectionItems[i].BoolValueField_2</label>
+            </td>
+        }
+        @if (Model.Collection.BoolNameField_3 != null && Model.Collection.BoolNameField_3 != String.Empty)
+        {
+            <td>
+                <label>@Model.CollectionItems[i].BoolValueField_3</label>
+            </td>
+        }
+        <td>
+            <a asp-action="Detail" asp-controller="Item" asp-route-id="@Model.CollectionItems[i].Id">@Localizer["View"]</a>
+            @if (User.Identity.Name == Model.Collection.Owner.UserName || User.IsInRole("admin"))
+            {
+                <a>/</a>
+                <a asp-action="Edit" asp-controller="Item" asp-route-id="@Model.CollectionItems[i].Id">@Localizer["Edit"]</a>
+                <a>/</a>
+                <a asp-action="Delete" asp-controller="Item" asp-route-id="@Model.CollectionItems[i].Id">@Localizer["Delete"]</a>
+            }
+        </td>
+    </tr>
+}

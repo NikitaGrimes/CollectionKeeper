@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model UserRoleModel
+
+<p>@Localizer["User"]: @Model.User.UserName</p>
+<div class="row">
+    <div class="form-group">
+        <form method="post">
+            <input asp-for="User.Id" type="hidden" />
+            <input asp-for="IsAdmin" type="checkbox" />
+            <label>@Localizer["AdminRole"]</label>
+            <div class="form-group">
+                <input type="submit" value="@Localizer["Save"]" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>

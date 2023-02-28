@@ -1,0 +1,74 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@using CollectionKeeper.Entities
+@model MyCollectionsModel
+
+<h2>@Localizer["Head"], @Model.OwnerName</h2>
+<a asp-controller="Collection" asp-action="Create" asp-route-ownerName="@Model.OwnerName" class="btn btn-success">@Localizer["Add"]</a>
+<br />
+<div class="dropdown mt-3 mb-3">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+       @Localizer["SortBy"]
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li><a onclick="sortsearch('Def')" id="def" class="dropdown-item active" href="#" aria-current="true">@Localizer["Default"]</a></li>
+        <li><a onclick="sortsearch('Name')" id="name" class="dropdown-item" href="#">@Localizer["Name"]</a></li>
+        <li><a onclick="sortsearch('Des')" id="des" class="dropdown-item" href="#">@Localizer["Description"]</a></li>
+        <li><a onclick="sortsearch('Top')" id="top" class="dropdown-item" href="#">@Localizer["Topic"]</a></li>
+    </ul>
+</div>
+<p>@Localizer["Filter"]:</p>
+<input id="filters" class="form-control" />
+<input id="ownerName" asp-for="OwnerName" type="hidden" />
+<div id="collections">
+    @Html.Partial("_MyCollections", Model.Collections)
+</div>
+<script>
+    const filters = document.getElementById('filters');
+    const ownerName = document.getElementById('ownerName');
+    const defSort = document.getElementById('def');
+    const nameSort = document.getElementById('name');
+    const desSort = document.getElementById('des');
+    const topSort = document.getElementById('top');
+    let sort = 'Def';
+    filters.addEventListener('input', filtersearch);
+    function filtersearch() {
+        let args = '&filter=' + filters.value + '&sort=' + sort;
+        $.ajax({
+            type: 'GET',
+            url: '/Collection/FilterMyCollections?userName=' + ownerName.value + args,
+            success: function (data) {
+                $("#collections").html(data);
+            }
+        });
+    }
+
+    function sortsearch(sortBy) {
+        sort = sortBy;
+        defSort.setAttribute("class", "dropdown-item");
+        defSort.setAttribute("aria-current", "false");
+        nameSort.setAttribute("class", "dropdown-item");
+        nameSort.setAttribute("aria-current", "false");
+        desSort.setAttribute("class", "dropdown-item");
+        desSort.setAttribute("aria-current", "false");
+        topSort.setAttribute("class", "dropdown-item");
+        topSort.setAttribute("aria-current", "false");
+        if (sort.includes('Def')) {
+            defSort.setAttribute("class", "dropdown-item active");
+            defSort.setAttribute("aria-current", "true");
+        }
+        else if (sort.includes('Name')) {
+            nameSort.setAttribute("class", "dropdown-item active");
+            nameSort.setAttribute("aria-current", "true");
+        }
+        else if (sort.includes('Des')) {
+            desSort.setAttribute("class", "dropdown-item active");
+            desSort.setAttribute("aria-current", "true");
+        }
+        else if (sort.includes('Top')) {
+            topSort.setAttribute("class", "dropdown-item active");
+            topSort.setAttribute("aria-current", "true");
+        }
+        filtersearch();
+    }
+</script>

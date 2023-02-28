@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model int
+<div class="dropdown">
+    <input oninput="onTagChange(@Model)" id="tag_@Model" class="form-control" name="Tags" autocomplete="off" data-bs-toggle="dropdown" aria-expanded="false" />
+    <div id="tagResult_@Model" class="dropdown-menu" aria-labelledby="tag_@Model">
+    </div>
+</div>
+<div id="addTag_@Model">
+
+</div>

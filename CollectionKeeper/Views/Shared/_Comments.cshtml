@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@using CollectionKeeper.Entities
+@model List<Comment>
+
+@foreach(Comment comment in Model){
+    <div class="form-control">
+        <p><strong>@comment.Author.UserName</strong></p>
+        <label class="small text-muted">@comment.CreatedTime</label>
+        @if (User.Identity.IsAuthenticated && (User.Identity.Name == comment.CollectionItem.Collection.Owner.UserName || User.IsInRole("admin")))
+        {
+            <a class="float-end" asp-controller="Item" asp-action="DeleteComment" asp-route-id="@comment.Id">@Localizer["Delete"]</a>
+        }
+        <p>@comment.Text</p>
+    </div>
+}

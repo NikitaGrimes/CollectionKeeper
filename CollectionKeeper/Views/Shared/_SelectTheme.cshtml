@@ -1,0 +1,22 @@
+﻿@{
+    var theme = Context.Request.Cookies["theme"];
+    if(theme == null)
+    {
+        theme = "Light";
+    }
+    
+    IEnumerable<string> themeItems = new List<string>()
+    {
+        "Light",
+        "Dark",
+        "Quartz",
+        "Vapor"
+    };
+    var themes = new SelectList(themeItems, theme);
+}
+
+<form asp-controller="Home" asp-action="SetTheme" asp-route-returnUrl="@Context.Request.Path"
+      method="post" class="form-horizontal">
+    <select class="form-select" name="theme" onchange="this.form.submit();" asp-items="themes">
+    </select>
+</form>

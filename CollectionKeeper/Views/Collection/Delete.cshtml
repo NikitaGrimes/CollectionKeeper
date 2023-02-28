@@ -1,0 +1,13 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model CollectionDeleteModel
+<form method="post">
+    <h2>@Localizer["Head"] @Model.Name?</h2>
+    <div class="text-break">
+        <markdown>
+            @Model.Description
+        </markdown>
+    </div>
+    <input asp-for="Id" type="hidden"/>
+    <input type="submit" value="@Localizer["Delete"]" class="btn btn-danger" />
+</form>

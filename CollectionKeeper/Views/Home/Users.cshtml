@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@using CollectionKeeper.Entities
+@model List<CollectionUser>
+
+<h2>@Localizer["Head"]</h2>
+<table class="table">
+    <tr>
+        <td>
+            <label>Id</label>
+        </td>
+        <td>
+            <label>@Localizer["Name"]</label>
+        </td>
+        <td>
+            <label>@Localizer["Email"]</label>
+        </td>
+        <td>
+            <label>@Localizer["BlockStatus"]</label>
+        </td>
+        <td>
+            <label>@Localizer["Action"]</label>
+        </td>
+    </tr>
+    <tbody>
+    @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>
+                    <label>@Model[i].Id</label>
+                </td>
+                <td>
+                    <label>@Model[i].UserName</label>
+                </td>
+                <td>
+                    <label>@Model[i].Email</label>
+                </td>
+                <td>
+                    @if (Model[i].LockoutEnabled)
+                    {
+                        <label>@Localizer["Unblocked"]</label>
+                    } else
+                    {
+                        <label>@Localizer["Blocked"]</label>
+                    }
+                </td>
+                <td>
+                    <a asp-action="ManageUser" asp-controller="Home" asp-route-id="@Model[i].Id">@Localizer["ManageUser"]</a>
+                    <a>/</a>
+                    <a asp-action="UserRole" asp-controller="Home" asp-route-id="@Model[i].Id">@Localizer["EditRole"]</a>
+                    <a>/</a>
+                    <a asp-action="MyCollections" asp-controller="Collection" asp-route-userName="@Model[i].UserName">@Localizer["ViewСollections"]</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

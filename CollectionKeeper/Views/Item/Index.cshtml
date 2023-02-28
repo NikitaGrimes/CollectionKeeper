@@ -1,0 +1,177 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model IndexItemModel
+
+<h2>@Localizer["Head"] @Model.Collection.Name</h2>
+@if (Model.Collection.Owner.UserName == User.Identity.Name || User.IsInRole("admin"))
+{
+    <a asp-action="Create" asp-controller="Item" asp-route-id="@Model.Collection.Id" class="btn btn-success">@Localizer["NewItem"]</a>
+}
+<input id="colId" value="@Model.Collection.Id" type="hidden"/>
+<p>@Localizer["Filter"]:</p>
+<input id="filters" class="form-control" />
+<table class="table">
+    <tr>
+        <td>
+            <label id="name" onclick="sortBy('name')">@Localizer["Name"]</label>
+        </td>
+        <td>
+            <label>@Localizer["Tags"]</label>
+        </td>
+        @if (Model.Collection.NumberNameField_1 != null && Model.Collection.NumberNameField_1 != String.Empty)
+        {
+            <td>
+                <label id="NumberNameField_1" onclick="sortBy('NumberNameField_1')">@Model.Collection.NumberNameField_1</label>
+            </td>
+        }
+        @if (Model.Collection.NumberNameField_2 != null && Model.Collection.NumberNameField_2 != String.Empty)
+        {
+            <td>
+                <label id="NumberNameField_2" onclick="sortBy('NumberNameField_2')">@Model.Collection.NumberNameField_2</label>
+            </td>
+        }
+        @if (Model.Collection.NumberNameField_3 != null && Model.Collection.NumberNameField_3 != String.Empty)
+        {
+            <td>
+                <label id="NumberNameField_3" onclick="sortBy('NumberNameField_3')">@Model.Collection.NumberNameField_3</label>
+            </td>
+        }
+        @if (Model.Collection.StringNameField_1 != null && Model.Collection.StringNameField_1 != String.Empty)
+        {
+            <td>
+                <label id="StringNameField_1" onclick="sortBy('StringNameField_1')">@Model.Collection.StringNameField_1</label>
+            </td>
+        }
+        @if (Model.Collection.StringNameField_2 != null && Model.Collection.StringNameField_2 != String.Empty)
+        {
+            <td>
+                <label id="StringNameField_2" onclick="sortBy('StringNameField_2')">@Model.Collection.StringNameField_2</label>
+            </td>
+        }
+        @if (Model.Collection.StringNameField_3 != null && Model.Collection.StringNameField_3 != String.Empty)
+        {
+            <td>
+                <label id="StringNameField_3" onclick="sortBy('StringNameField_3')">@Model.Collection.StringNameField_3</label>
+            </td>
+        }
+        @if (Model.Collection.TextNameField_1 != null && Model.Collection.TextNameField_1 != String.Empty)
+        {
+            <td>
+                <label id="TextNameField_1" onclick="sortBy('TextNameField_1')">@Model.Collection.TextNameField_1</label>
+            </td>
+        }
+        @if (Model.Collection.TextNameField_2 != null && Model.Collection.TextNameField_2 != String.Empty)
+        {
+            <td>
+                <label id="TextNameField_2" onclick="sortBy('TextNameField_2')">@Model.Collection.TextNameField_2</label>
+            </td>
+        }
+        @if (Model.Collection.TextNameField_3 != null && Model.Collection.TextNameField_3 != String.Empty)
+        {
+            <td>
+                <label id="TextNameField_3" onclick="sortBy('TextNameField_3')">@Model.Collection.TextNameField_3</label>
+            </td>
+        }
+        @if (Model.Collection.DateNameField_1 != null && Model.Collection.DateNameField_1 != String.Empty)
+        {
+            <td>
+                <label id="DateNameField_1" onclick="sortBy('DateNameField_1')">@Model.Collection.DateNameField_1</label>
+            </td>
+        }
+        @if (Model.Collection.DateNameField_2 != null && Model.Collection.DateNameField_2 != String.Empty)
+        {
+            <td>
+                <label id="DateNameField_2" onclick="sortBy('DateNameField_2')">@Model.Collection.DateNameField_2</label>
+            </td>
+        }
+        @if (Model.Collection.DateNameField_3 != null && Model.Collection.DateNameField_3 != String.Empty)
+        {
+            <td>
+                <label id="DateNameField_3" onclick="sortBy('DateNameField_3')">@Model.Collection.DateNameField_3</label>
+            </td>
+        }
+        @if (Model.Collection.BoolNameField_1 != null && Model.Collection.BoolNameField_1 != String.Empty)
+        {
+            <td>
+                <label id="BoolNameField_1" onclick="sortBy('BoolNameField_1')">@Model.Collection.BoolNameField_1</label>
+            </td>
+        }
+        @if (Model.Collection.BoolNameField_2 != null && Model.Collection.BoolNameField_2 != String.Empty)
+        {
+            <td>
+                <label id="BoolNameField_2" onclick="sortBy('BoolNameField_2')">@Model.Collection.BoolNameField_2</label>
+            </td>
+        }
+        @if (Model.Collection.BoolNameField_3 != null && Model.Collection.BoolNameField_3 != String.Empty)
+        {
+            <td>
+                <label id="BoolNameField_3" onclick="sortBy('BoolNameField_3')">@Model.Collection.BoolNameField_3</label>
+            </td>
+        }
+        @if (User.Identity.Name == Model.Collection.Owner.UserName || User.IsInRole("admin"))
+        {
+            <td>
+                <label>@Localizer["Action"]</label>
+            </td>
+        }
+    </tr>
+    <tbody id="items">
+        @Html.Partial("_IndexItem", Model)
+    </tbody>
+</table>
+
+<script>
+    const filters = document.getElementById('filters');
+    let ids = new Array();
+    let filter = "";
+    let fieldNameSort = "";
+
+    filters.addEventListener('input', filtersearch);
+    function filtersearch() {
+        filter = filters.value;
+        let args = "id=" + document.getElementById("colId").value + "&fieldNameSort=" + fieldNameSort + "&filter=" + filter;
+        $.ajax({
+            type: 'GET',
+            url: '/Item/SortFilterItems?' + args,
+            success: function (data) {
+                $("#items").html(data);
+            }
+        });
+    }о
+
+    function sortBy(id){
+        if (!ids.includes(id)){
+            ids.push(id);
+        }
+        ids.forEach((element) => {
+            if(element != id){
+                let textContent = document.getElementById(element).textContent;
+                textContent = textContent.replace("↑", "").replace("↓", "");
+                document.getElementById(element).textContent = textContent;
+            }
+        })
+        let text = document.getElementById(id).textContent;
+        fieldNameSort = id;
+        if (text.includes("↑")) {
+            text = text.replace("↑", "↓");
+            fieldNameSort += "↓";
+        }
+        else if (text.includes("↓")) {
+            text = text.replace("↓", "↑");
+            fieldNameSort += "↑";
+        }
+        else{
+            text += "↓";
+            fieldNameSort += "↓";
+        }
+        let args = "id=" + document.getElementById("colId").value + "&fieldNameSort=" + fieldNameSort + "&filter=" + filter;
+        $.ajax({
+            type: 'GET',
+            url: '/Item/SortFilterItems?' + args,
+            success: function (data) {
+                $("#items").html(data);
+                document.getElementById(id).textContent = text;
+            }
+        });
+    }
+</script>

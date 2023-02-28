@@ -1,0 +1,84 @@
+﻿@using CollectionKeeper.Entities
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model HomeModel
+
+<h2>@Localizer["LastItems"]</h2>
+@Html.Partial("_Items", Model.LastItems)
+<hr />
+<h2>@Localizer["BiggestCollection"]</h2>
+<table class="table">
+    @foreach (var collection in Model.Collections)
+    {
+        <tr>
+            <td class="w-25">
+                <a asp-action="Index" asp-controller="Item" asp-route-id="@collection.Id" class="text-decoration-none text-reset">
+                    <img src="@Url.Content(collection.Image)" class="w-100" />
+                    <p class="text-break">@collection.Topic.Name</p>
+                </a>
+            </td>
+            <td>
+                <a asp-action="Index" asp-controller="Item" asp-route-id="@collection.Id" class="text-decoration-none text-reset">
+                    <p class="text-break">@collection.Name</p>
+                    <div class="text-break">
+                        <markdown>
+                                @collection.Description
+                        </markdown>
+                    </div>
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+<hr />
+<h3>@Localizer["Tags"]</h3>
+
+@foreach (var tag in Model.Tags)
+{
+    <a id="tag_@tag.Id" onclick="tagSearch(@tag.Id)" class="@tag.CssClass text-reset ms-3 text-decoration-none">@tag.Name</a>
+}
+
+<div id="itemTags" class="vh-100">
+
+</div>
+
+<script>
+    const itemDiv = document.getElementById("itemTags");
+    let tags = new Array();
+    let nonUnderlineCss = "text-decoration-none";
+
+    function tagSearch(tagId){
+        let isFind = false;
+        for (let i = 0; i < tags.length; i++) {
+            if(tagId == tags[i]){
+                tags.splice(i, 1);
+                isFind = true; 
+                let tagStringId = "tag_" + tagId;
+                let cssClass = document.getElementById(tagStringId).getAttribute("class").replace(nonUnderlineCss, "");
+                document.getElementById(tagStringId).setAttribute("class", cssClass);
+            }
+        }
+
+        if(!isFind){
+            tags.push(Number(tagId));
+            let tagStringId = "tag_" + tagId;
+            let cssClass = document.getElementById(tagStringId).getAttribute("class") + nonUnderlineCss;
+            document.getElementById(tagStringId).setAttribute("class", cssClass);
+        }
+
+        let args = "";
+        for (let i = 0; i < tags.length; i++){
+            args += "ids=" + tags[i];
+            if (i < tags.length - 1){
+                args += "&";
+            }
+        }
+        $.ajax({
+            type: 'GET',
+            url: '/Home/GetTagItems?' + args,
+            success: function (data) {
+                $("#itemTags").html(data);
+            }
+        });
+    }
+</script>

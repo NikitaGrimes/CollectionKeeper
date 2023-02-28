@@ -1,0 +1,197 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model ItemEditModel
+<h2>@Localizer["Head"]</h2>
+
+<div class="row">
+    <div>
+        <form method="post">
+            <div asp-validation-summary="ModelOnly"></div>
+            <input asp-for="Collection.Id" type="hidden" value="@Model.Collection.Id" />
+            <input asp-for="Id" type="hidden"/>
+            <div class="form-group">
+                <label>@Localizer["Name"]:</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <input id="tagsNum" type="hidden" value="@Model.Tags.Count()"/>
+            <div class="form-group">
+                <label>@Localizer["Tags"]:</label>
+                @for(int i = 0; i < Model.Tags.Count(); i++)
+                {
+                    <div class="dropdown">
+                        <input value="@Model.Tags[i]" oninput="onTagChange(@i)" id="tag_@i" class="form-control" name="Tags" autocomplete="off" data-bs-toggle="dropdown" aria-expanded="false" />
+                        <div id="tagResult_@i" class="dropdown-menu" aria-labelledby="tag_@i">
+                        </div>
+                    </div>
+                }
+                <div id="addTag_@Model.Tags.Count()">
+                </div>
+                <input onclick="addTag()" id="addTagButton" type="button" class="btn btn-success" value="@Localizer["AddTag"]" />
+            </div>
+            <div class="form-group">
+                @if (Model.Collection.NumberNameField_1 != null && Model.Collection.NumberNameField_1 != String.Empty)
+                {
+                    <label>@Model.Collection.NumberNameField_1:</label>
+                    <input asp-for="NumberValueField_1" class="form-control" />
+                }
+            </div>
+            <div class="form-group">
+                @if (Model.Collection.NumberNameField_2 != null && Model.Collection.NumberNameField_2 != String.Empty)
+                {
+                    <label>@Model.Collection.NumberNameField_2:</label>
+                    <input asp-for="NumberValueField_2" class="form-control" />
+                }
+            </div>
+            <div class="form-group">
+                @if (Model.Collection.NumberNameField_3 != null && Model.Collection.NumberNameField_3 != String.Empty)
+                {
+                    <label>@Model.Collection.NumberNameField_3:</label>
+                    <input asp-for="NumberValueField_3" class="form-control" />
+                }
+            </div>
+            <div class="form-group">
+                @if (Model.Collection.StringNameField_1 != null && Model.Collection.StringNameField_1 != String.Empty)
+                {
+                    <label>@Model.Collection.StringNameField_1:</label>
+                    <input asp-for="StringValueField_1" class="form-control" />
+                }
+            </div>
+            <div class="form-group">
+                @if (Model.Collection.StringNameField_2 != null && Model.Collection.StringNameField_2 != String.Empty)
+                {
+                    <label>@Model.Collection.StringNameField_2:</label>
+                    <input asp-for="StringValueField_2" class="form-control" />
+                }
+            </div>
+            <div class="form-group">
+                @if (Model.Collection.StringNameField_3 != null && Model.Collection.StringNameField_3 != String.Empty)
+                {
+                    <label>@Model.Collection.StringNameField_3:</label>
+                    <input asp-for="StringValueField_3" class="form-control" />
+                }
+            </div>
+            <div class="form-group">
+                @if (Model.Collection.TextNameField_1 != null && Model.Collection.TextNameField_1 != String.Empty)
+                {
+                    <label>@Model.Collection.TextNameField_1:</label>
+                    <textarea asp-for="TextValueField_1" rows="10" type="text" class="form-control"></textarea>
+                }
+            </div>
+            <div class="form-group">
+                @if (Model.Collection.TextNameField_2 != null && Model.Collection.TextNameField_2 != String.Empty)
+                {
+                    <label>@Model.Collection.TextNameField_2:</label>
+                    <textarea asp-for="TextValueField_2" rows="10" type="text" class="form-control"></textarea>
+                }
+            </div>
+            <div class="form-group">
+                @if (Model.Collection.TextNameField_3 != null && Model.Collection.TextNameField_3 != String.Empty)
+                {
+                    <label>@Model.Collection.TextNameField_3:</label>
+                    <textarea asp-for="TextValueField_3" rows="10" type="text" class="form-control"></textarea>
+                }
+            </div>
+            <div class="form-group">
+                @if (Model.Collection.DateNameField_1 != null && Model.Collection.DateNameField_1 != String.Empty)
+                {
+                    <label>@Model.Collection.DateNameField_1:</label>
+                     <div class="form-group row">
+                        <input asp-for="DateValueField_1" type="date" class="form-control w-auto"/>
+                        @if (Model.Collection.IsHasTime_1)
+                        {
+                            <input asp-for="TimeValueField_1" type="time" class="form-control w-auto" />
+                        }
+                    </div>
+                }
+            </div>
+            <div class="form-group">
+                @if (Model.Collection.DateNameField_2 != null && Model.Collection.DateNameField_2 != String.Empty)
+                {
+                    <label>@Model.Collection.DateNameField_2:</label>
+                    <div class="form-group row">
+                        <input asp-for="DateValueField_2" type="date" class="form-control w-auto" />
+                        @if (Model.Collection.IsHasTime_2)
+                        {
+                            <input asp-for="TimeValueField_2" type="time" class="form-control w-auto" />
+                        }
+                    </div>
+                }
+            </div>
+            <div class="form-group">
+                @if (Model.Collection.DateNameField_3 != null && Model.Collection.DateNameField_3 != String.Empty)
+                {
+                    <label>@Model.Collection.DateNameField_3:</label>
+                    <div class="form-group row">
+                        <input asp-for="DateValueField_3" type="date" class="form-control w-auto" />
+                        @if (Model.Collection.IsHasTime_3)
+                        {
+                            <input asp-for="TimeValueField_3" type="time" class="form-control w-auto" />
+                        }
+                    </div>
+                }
+            </div>
+            <div class="form-group">
+                @if (Model.Collection.BoolNameField_1 != null && Model.Collection.BoolNameField_1 != String.Empty)
+                {
+                    <label>@Model.Collection.BoolNameField_1:</label>
+                    <input asp-for="BoolValueField_1" type="checkbox"/>
+                }
+            </div>
+            <div class="form-group">
+                @if (Model.Collection.BoolNameField_2 != null && Model.Collection.BoolNameField_2 != String.Empty)
+                {
+                    <label>@Model.Collection.BoolNameField_2:</label>
+                    <input asp-for="BoolValueField_2" type="checkbox"/>
+                }
+            </div>
+            <div class="form-group">
+                @if (Model.Collection.BoolNameField_3 != null && Model.Collection.BoolNameField_3 != String.Empty)
+                {
+                    <label>@Model.Collection.BoolNameField_3:</label>
+                    <input asp-for="BoolValueField_3" type="checkbox"/>
+                }
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="@Localizer["Save"]" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    let num = Number(document.getElementById("tagsNum").value) + 1;
+    function addTag() {
+        $.ajax({
+            type: 'GET',
+            url: '/Item/AddTag?id=' + num,
+            success: function (data) {
+                let addTagId = num - 1;
+                let addTagDiv = "addTag_" + addTagId;
+                document.getElementById(addTagDiv).innerHTML = data;
+                num++;
+            }
+        });
+    }
+
+    function onTagChange(id) {
+        let tagId = "tag_" + id;
+        let text = document.getElementById(tagId).value;
+        let args = "term=" + text + "&id=" + id;
+        $.ajax({
+            type: 'GET',
+            url: '/Item/TagSearch?' + args,
+            success: function (data) {
+                let idTagResult = "#tagResult_" + id;
+                $(idTagResult).html('');
+                $(idTagResult).append(data);
+            }
+        });
+    }
+
+    function onChooseTag(id, value) {
+        let tagId = "tag_" + id;
+        document.getElementById(tagId).value = value;
+    }
+</script>

@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model ManageUserModel
+
+<form asp-controller="Home" method="post">
+    <h2>@Localizer["Head"] @Model.UserName</h2>
+    <input asp-for="UserName" type="hidden" value="@Model.UserName" />
+    <div>
+        <dl class="dl-horizontal">
+            <dt>Id</dt>
+            <input asp-for="Id" type="hidden" value="@Model.Id"/>
+            <dd>@Model.Id</dd>
+            <dt>Email</dt>
+            <input asp-for="Email" type="hidden" value="@Model.Email" />
+            <dd>@Model.Email</dd>
+            <dt>@Localizer["BlockedStatus"]</dt>
+            <input asp-for="LockoutEnabled" type="hidden" value="@Model.LockoutEnabled" />
+            @if (Model.LockoutEnabled)
+            {
+                <dd>@Localizer["Unblocked"]</dd>
+            }
+            else
+            {
+                    <dd>@Localizer["Blocked"]</dd>
+            }
+        </dl>
+        <div>
+            <input asp-action="Delete" type="submit" class="btn btn-danger" value="@Localizer["Delete"]" />
+            <input asp-action="Block" type="submit" class="btn btn-warning" value="@Localizer["Block"]" />
+            <input asp-action="UnBlock" type="submit" class="btn btn-success" value="@Localizer["Unblock"]" />
+        </div>
+    </div>
+</form>

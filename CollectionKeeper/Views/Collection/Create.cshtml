@@ -1,0 +1,223 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model CollectionCreatedModel
+<h2>@Localizer["Head"]</h2>
+
+<div class="row">
+    <div>
+        <form method="post" enctype="multipart/form-data">
+            <input asp-for="ownerName" type="hidden"/>
+            <div class="form-group">
+                <label>@Localizer["DropImage"]</label>
+                <input asp-for="Image" class="form-control pt-5 pb-5" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>@Localizer["CollectionName"]</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <label>@Localizer["SelectTopic"]</label>
+            <div class="form-group">
+                <select class="form-select" asp-items="Model.Topics" asp-for="Topic">
+                </select>
+            </div>
+            <div class="form-group">
+                <label>@Localizer["Description"]</label>
+                <textarea asp-for="Description" class="form-control" rows="10"></textarea>
+            </div>
+            <table class="table">
+                <tr>
+                    <td>
+                        <input asp-for="IsEnabledNumberField_1" type="checkbox"/>
+                    </td>
+                    <td>
+                        <label>@Localizer["NumericField"]</label>
+                    </td>
+                    <td>
+                        <input asp-for="NumberNameField_1" class="form-control" />
+                        <span asp-validation-for="NumberNameField_1" class="text-danger"></span>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="IsEnabledNumberField_2" type="checkbox"/>
+                    </td>
+                    <td>
+                        <label>@Localizer["NumericField"]</label>
+                    </td>
+                    <td>
+                        <input asp-for="NumberNameField_2" class="form-control" />
+                        <span asp-validation-for="NumberNameField_2" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="IsEnabledNumberField_3" type="checkbox" />
+                    </td>
+                    <td>
+                        <label>@Localizer["NumericField"]</label>
+                    </td>
+                    <td>
+                        <input asp-for="NumberNameField_3" class="form-control" />
+                        <span asp-validation-for="NumberNameField_3" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="IsEnabledStringField_1" type="checkbox" />
+                    </td>
+                    <td>
+                        <label>@Localizer["StringField"]</label>
+                    </td>
+                    <td>
+                        <input asp-for="StringNameField_1" class="form-control" />
+                        <span asp-validation-for="StringNameField_1" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="IsEnabledStringField_2" type="checkbox" />
+                    </td>
+                    <td>
+                        <label>@Localizer["StringField"]</label>
+                    </td>
+                    <td>
+                        <input asp-for="StringNameField_2" class="form-control" />
+                        <span asp-validation-for="StringNameField_2" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="IsEnabledStringField_3" type="checkbox" />
+                    </td>
+                    <td>
+                        <label>@Localizer["StringField"]</label>
+                    </td>
+                    <td>
+                        <input asp-for="StringNameField_3" class="form-control" />
+                        <span asp-validation-for="StringNameField_3" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="IsEnabledTextField_1" type="checkbox" />
+                    </td>
+                    <td>
+                        <label>@Localizer["TextField"]</label>
+                    </td>
+                    <td>
+                        <input asp-for="TextNameField_1" class="form-control" />
+                        <span asp-validation-for="TextNameField_1" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="IsEnabledTextField_2" type="checkbox" />
+                    </td>
+                    <td>
+                        <label>@Localizer["TextField"]</label>
+                    </td>
+                    <td>
+                        <input asp-for="TextNameField_2" class="form-control" />
+                        <span asp-validation-for="TextNameField_2" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="IsEnabledTextField_3" type="checkbox" />
+                    </td>
+                    <td>
+                        <label>@Localizer["TextField"]</label>
+                    </td>
+                    <td>
+                        <input asp-for="TextNameField_3" class="form-control" />
+                        <span asp-validation-for="TextNameField_3" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="IsEnabledDateField_1" type="checkbox" />
+                    </td>
+                    <td>
+                        <label>@Localizer["DateField"]</label>
+                    </td>
+                    <td>
+                        <input asp-for="IsHasTime_1" type="checkbox" />
+                        <label>@Localizer["TimeField"]</label>
+                        <input asp-for="DateNameField_1" class="form-control" />
+                        <span asp-validation-for="DateNameField_1" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="IsEnabledDateField_2" type="checkbox" />
+                    </td>
+                    <td>
+                        <label>@Localizer["DateField"]</label>
+                    </td>
+                    <td>
+                        <input asp-for="IsHasTime_2" type="checkbox" />
+                        <label>@Localizer["TimeField"]</label>
+                        <input asp-for="DateNameField_2" class="form-control" />
+                        <span asp-validation-for="DateNameField_2" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="IsEnabledDateField_3" type="checkbox" />
+                    </td>
+                    <td>
+                        <label>@Localizer["DateField"]</label>
+                    </td>
+                    <td>
+                        <input asp-for="IsHasTime_3" type="checkbox" />
+                        <label>@Localizer["TimeField"]</label>
+                        <input asp-for="DateNameField_3" class="form-control" />
+                        <span asp-validation-for="DateNameField_3" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="IsEnabledBoolField_1" type="checkbox" />
+                    </td>
+                    <td>
+                        <label>@Localizer["BoolField"]</label>
+                    </td>
+                    <td>
+                        <input asp-for="BoolNameField_1" class="form-control" />
+                        <span asp-validation-for="BoolNameField_1" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="IsEnabledBoolField_2" type="checkbox" />
+                    </td>
+                    <td>
+                        <label>@Localizer["BoolField"]</label>
+                    </td>
+                    <td>
+                        <input asp-for="BoolNameField_2" class="form-control" />
+                        <span asp-validation-for="BoolNameField_2" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="IsEnabledBoolField_3" type="checkbox" />
+                    </td>
+                    <td>
+                        <label>@Localizer["BoolField"]</label>
+                    </td>
+                    <td>
+                        <input asp-for="BoolNameField_3" class="form-control" />
+                        <span asp-validation-for="BoolNameField_3" class="text-danger"></span>
+                    </td>
+                </tr>
+            </table>
+            <div class="form-group">
+                <input type="submit" value="@Localizer["Create"]" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>

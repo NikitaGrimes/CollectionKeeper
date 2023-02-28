@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@using CollectionKeeper.Entities
+@model List<CollectionItem>
+
+@foreach (var item in Model)
+{
+    <div class="media mb-2">
+        <div class="media-body">
+            <a class="media-body text-decoration-none text-reset" asp-action="Detail" asp-controller="Item" asp-route-id="@item.Id">
+                <p class="mb-1"><strong>@item.Name</strong></p>
+                <p class="small text-muted">@item.CreatedDate</p>
+            </a>
+        </div>
+    </div>
+}

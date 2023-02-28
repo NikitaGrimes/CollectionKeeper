@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@using CollectionKeeper.Entities
+@model List<Collection>
+
+<table class="table">
+    @if (Model != null)
+    {
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td class="w-25">
+                    <a asp-action="Index" asp-controller="Item" asp-route-id="@Model[i].Id" class="text-decoration-none text-reset">
+                        <img src="@Url.Content(Model[i].Image)" class="w-100" />
+                        <p class="text-break">@Model[i].Topic.Name</p>
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Index" asp-controller="Item" asp-route-id="@Model[i].Id" class="text-decoration-none text-reset">
+                        <p class="text-break">@Model[i].Name</p>
+                        <div class="text-break">
+                            <markdown>
+                                @Model[i].Description
+                            </markdown>
+                        </div>
+                    </a>
+                </td>
+                @if (User.IsInRole("admin"))
+                {
+                    <td>
+                        <a asp-action="Edit" asp-controller="Collection" asp-route-id="@Model[i].Id">@Localizer["Edit"]</a>
+                        <a>/</a>
+                                    <a asp-action="Delete" asp-controller="Collection" asp-route-id="@Model[i].Id">@Localizer["Delete"]</a>
+                    </td>
+                }
+            </tr>
+        }
+    }
+</table>

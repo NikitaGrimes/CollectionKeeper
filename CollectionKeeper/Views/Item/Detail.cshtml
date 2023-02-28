@@ -1,0 +1,235 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@using CollectionKeeper.Entities
+@model CollectionItem
+<dl class="dl-horizontal">
+<dt>@Localizer["Name"]: </dt>
+<dd>@Model.Name</dd>
+<dt>@Localizer["Tags"]:</dt>
+@foreach (var tag in Model.Tags)
+{
+    <dd>@tag.Name </dd>
+}
+@if (Model.Collection.NumberNameField_1 != null && Model.Collection.NumberNameField_1 != String.Empty)
+{
+    <dt>@Model.Collection.NumberNameField_1:</dt>
+    @if (Model.NumberValueField_1 != null)
+    {
+        <dd>@Model.NumberValueField_1.Value.ToString().TrimEnd('0').TrimEnd(',').TrimEnd('.')</dd>
+    }
+}
+@if (Model.Collection.NumberNameField_2 != null && Model.Collection.NumberNameField_2 != String.Empty)
+{
+    <dt>@Model.Collection.NumberNameField_2:</dt>
+    @if (Model.NumberValueField_2 != null)
+    {
+        <dd>@Model.NumberValueField_2.Value.ToString().TrimEnd('0').TrimEnd(',').TrimEnd('.')</dd>
+    }
+}
+@if (Model.Collection.NumberNameField_3 != null && Model.Collection.NumberNameField_3 != String.Empty)
+{
+    <dt>@Model.Collection.NumberNameField_3:</dt>
+    @if (Model.NumberValueField_3 != null)
+    {
+        <dd>@Model.NumberValueField_3.Value.ToString().TrimEnd('0').TrimEnd(',').TrimEnd('.')</dd>
+    }
+}
+
+@if (Model.Collection.StringNameField_1 != null && Model.Collection.StringNameField_1 != String.Empty)
+{
+    <dt>@Model.Collection.StringNameField_1:</dt>
+    <dd>@Model.StringValueField_1</dd>
+}
+@if (Model.Collection.StringNameField_2 != null && Model.Collection.StringNameField_2 != String.Empty)
+{
+    <dt>@Model.Collection.StringNameField_2:</dt>
+    <dd>@Model.StringValueField_2</dd>
+}
+@if (Model.Collection.StringNameField_3 != null && Model.Collection.StringNameField_3 != String.Empty)
+{
+    <dt>@Model.Collection.StringNameField_3:</dt>
+    <dd>@Model.StringValueField_3</dd>
+}
+
+@if (Model.Collection.TextNameField_1 != null && Model.Collection.TextNameField_1 != String.Empty)
+{
+    <dt>@Model.Collection.TextNameField_1:</dt>
+    <div class="text-break">
+        <markdown>
+            @Model.TextValueField_1
+        </markdown>
+    </div>
+}
+@if (Model.Collection.TextNameField_2 != null && Model.Collection.TextNameField_2 != String.Empty)
+{
+    <dt>@Model.Collection.TextNameField_2:</dt>
+    <div class="text-break">
+        <markdown>
+            @Model.TextValueField_2
+        </markdown>
+    </div>
+}
+@if (Model.Collection.TextNameField_3 != null && Model.Collection.TextNameField_3 != String.Empty)
+{
+    <dt>@Model.Collection.TextNameField_3:</dt>
+    <div class="text-break">
+        <markdown>
+            @Model.TextValueField_3
+        </markdown>
+    </div>
+}
+
+@if (Model.Collection.DateNameField_1 != null && Model.Collection.DateNameField_1 != String.Empty)
+{
+    <dt>@Model.Collection.DateNameField_1:</dt>
+    @if (Model.Collection.IsHasTime_1)
+    {
+        <dd>@Model.DateValueField_1.Value.ToString("ddd, dd MMM yyy HH:mm")</dd>
+    }
+    else
+    {
+        <dd>@Model.DateValueField_1.Value.ToString("ddd, dd MMM yyy")</dd>
+    }
+}
+@if (Model.Collection.DateNameField_2 != null && Model.Collection.DateNameField_2 != String.Empty)
+{
+    <dt>@Model.Collection.DateNameField_2:</dt>
+    @if (Model.Collection.IsHasTime_2)
+    {
+        <dd>@Model.DateValueField_2.Value.ToString("ddd, dd MMM yyy HH:mm")</dd>
+    }
+    else
+    {
+        <dd>@Model.DateValueField_2.Value.ToString("ddd, dd MMM yyy")</dd>
+    }
+}
+@if (Model.Collection.DateNameField_3 != null && Model.Collection.DateNameField_3 != String.Empty)
+{
+    <dt>@Model.Collection.DateNameField_3:</dt>
+    @if (Model.Collection.IsHasTime_3)
+    {
+        <dd>@Model.DateValueField_3.Value.ToString("ddd, dd MMM yyy HH:mm")</dd>
+    }
+    else
+    {
+        <dd>@Model.DateValueField_3.Value.ToString("ddd, dd MMM yyy")</dd>
+    }
+}
+
+@if (Model.Collection.BoolNameField_1 != null && Model.Collection.BoolNameField_1 != String.Empty)
+{
+    <dt>@Model.Collection.BoolNameField_1:</dt>
+    <dd>@Model.BoolValueField_1</dd>
+}
+@if (Model.Collection.BoolNameField_2 != null && Model.Collection.BoolNameField_2 != String.Empty)
+{
+    <dt>@Model.Collection.BoolNameField_2:</dt>
+    <dd>@Model.BoolValueField_2</dd>
+}
+@if (Model.Collection.BoolNameField_3 != null && Model.Collection.BoolNameField_3 != String.Empty)
+{
+    <dt>@Model.Collection.BoolNameField_3:</dt>
+    <dd>@Model.BoolValueField_3</dd>
+}
+</dl>
+@if (User.Identity.IsAuthenticated)
+{
+    <input id="userName" value="@User.Identity.Name" type="hidden"/>
+    <div class="mt-2 mb-2">
+        <label id="likedCount_@Model.Id">@Model.LikedUsers.Count()</label>
+        @{
+            bool isFind = false;
+            foreach(var user in Model.LikedUsers)
+            {
+                if (user.UserName == User.Identity.Name)
+                {
+                    isFind = true;
+                    break;
+                }
+            }
+            if (isFind)
+            {
+                <input onclick="likeClick()" id="likeBtn" type="button" class="btn btn-outline-danger" value="@Localizer["Dislike"]" />
+            }
+            else
+            {
+                <input onclick="likeClick()" id="likeBtn" type="button" class="btn btn-outline-success" value="@Localizer["Like"]" />
+            }
+        }
+    </div>
+    <br/>
+    <div>
+        <textarea id="text" class="form-control" rows="5"></textarea>
+        <input onclick="commentClick()" id="sendButton" type="button" value="@Localizer["Comment"]" class="btn btn-success mt-3 mb-3" />
+    </div>
+}
+
+<div id="commentDiv_@Model.Id">
+    @Html.Partial("_Comments", Model.Comments.ToList())
+</div>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script>
+    let id = @Model.Id;
+    const textArea = document.getElementById("text");
+    let likedLabelId = "likedCount_" + id;
+    const likeBtn = document.getElementById("likeBtn");
+    const likedCountLabel = document.getElementById(likedLabelId);
+    const userNameInput = document.getElementById("userName");
+    let userName;
+    if(userNameInput != null){
+        userName = document.getElementById("userName").value;
+    }
+    let commentsId = "commentDiv_" + id;
+    const comments = document.getElementById(commentsId);
+    const hubConnection = new signalR.HubConnectionBuilder()
+        .withUrl("/comments")
+        .build();
+
+    hubConnection.on("SendComment", function (data, divId) {
+        if (divId == commentsId) {
+            var htmlBefor = comments.innerHTML;
+            comments.innerHTML = data + htmlBefor;
+        }
+    });
+
+    hubConnection.on("SendLike", function (divId, num) {
+        if (divId == likedLabelId) {
+            let count = Number(likedCountLabel.textContent);
+            likedCountLabel.textContent = count + num;
+        }
+    });
+
+    function commentClick(){
+        hubConnection.invoke("SendComment", textArea.value, userName, id);
+        textArea.value = "";
+    }
+    
+    function likeClick(){
+        let count = Number(likedCountLabel.textContent);
+        if (likeBtn.value == "Dislike") {
+            $.ajax({
+                type: 'POST',
+                url: '/Item/LikeDislikeItem?id=' + id,
+                success: function () {
+                    hubConnection.invoke("SendLike", -1, id);
+                    likeBtn.setAttribute("class", "btn btn-outline-success");
+                    likeBtn.setAttribute("value", "Like");
+                }
+            });
+        }
+        else {
+            $.ajax({
+                type: 'POST',
+                url: '/Item/LikeDislikeItem?id=' + id,
+                success: function () {
+                    hubConnection.invoke("SendLike", 1, id);
+                    likeBtn.setAttribute("class", "btn btn-outline-danger");
+                    likeBtn.setAttribute("value", "Dislike");
+                }
+            });
+        }
+    }
+ 
+    hubConnection.start();
+</script>

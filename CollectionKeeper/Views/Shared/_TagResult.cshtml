@@ -1,0 +1,8 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model (List<string>, int)
+@foreach(var item in Model.Item1){
+    <div onclick="onChooseTag(@Model.Item2, '@item')">
+        <p>@item</p>
+    </div>
+}

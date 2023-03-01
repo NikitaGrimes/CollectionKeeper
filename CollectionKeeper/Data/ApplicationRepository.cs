@@ -67,11 +67,19 @@ namespace CollectionKeeper.Data
             return false;
         }
 
+        public bool IsUserExist(string name)
+        {
+            return _context.Users.Any(u => u.UserName == name);
+        }
+
         public bool GetBlockUserStatus(string userName)
         {
             if (userName == null) return true;
 
-            return !_context.Users.FirstOrDefault(u => u.UserName == userName).LockoutEnabled;
+            CollectionUser user = _context.Users.FirstOrDefault(u => u.UserName == userName);
+            if (user == null) return true;
+
+            return !user.LockoutEnabled;
         }
 
         public IEnumerable<Collection> GetAllCollections()

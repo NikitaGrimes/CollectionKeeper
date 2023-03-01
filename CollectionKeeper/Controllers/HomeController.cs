@@ -195,10 +195,16 @@ namespace CollectionKeeper.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(!_applicationRepository.IsUserExist(loginModel.Name))
+                {
+                    ModelState.AddModelError("", _localizer["ExistError"]);
+                    return View(loginModel);
+                }
+
                 if (_applicationRepository.GetBlockUserStatus(loginModel.Name))
                 {
                     ModelState.AddModelError("", _localizer["BlockError"]);
-                    return View();
+                    return View(loginModel);
                 }
 
                 var result = await _signInManager.PasswordSignInAsync(loginModel.Name, loginModel.Password,

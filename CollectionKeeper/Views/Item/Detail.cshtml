@@ -82,44 +82,47 @@
 @if (Model.Collection.DateNameField_1 != null && Model.Collection.DateNameField_1 != String.Empty)
 {
     <dt>@Model.Collection.DateNameField_1:</dt>
-    @if (Model.Collection.IsHasTime_1)
-    {
-        <dd>@Model.DateValueField_1.Value.ToString("ddd, dd MMM yyy HH:mm")</dd>
-    }
-    else
-    {
-        <dd>@Model.DateValueField_1.Value.ToString("ddd, dd MMM yyy")</dd>
-    }
+    @if(Model.DateValueField_1.HasValue)
+        @if (Model.Collection.IsHasTime_1)
+        {
+            <dd>@Model.DateValueField_1.Value.ToString("ddd, dd MMM yyy HH:mm")</dd>
+        }
+        else
+        {
+            <dd>@Model.DateValueField_1.Value.ToString("ddd, dd MMM yyy")</dd>
+        }
 }
 @if (Model.Collection.DateNameField_2 != null && Model.Collection.DateNameField_2 != String.Empty)
 {
     <dt>@Model.Collection.DateNameField_2:</dt>
-    @if (Model.Collection.IsHasTime_2)
-    {
-        <dd>@Model.DateValueField_2.Value.ToString("ddd, dd MMM yyy HH:mm")</dd>
-    }
-    else
-    {
-        <dd>@Model.DateValueField_2.Value.ToString("ddd, dd MMM yyy")</dd>
-    }
+    @if (Model.DateValueField_2.HasValue)
+        @if (Model.Collection.IsHasTime_2)
+        {
+            <dd>@Model.DateValueField_2.Value.ToString("ddd, dd MMM yyy HH:mm")</dd>
+        }
+        else
+        {
+            <dd>@Model.DateValueField_2.Value.ToString("ddd, dd MMM yyy")</dd>
+        }
 }
 @if (Model.Collection.DateNameField_3 != null && Model.Collection.DateNameField_3 != String.Empty)
 {
     <dt>@Model.Collection.DateNameField_3:</dt>
-    @if (Model.Collection.IsHasTime_3)
-    {
-        <dd>@Model.DateValueField_3.Value.ToString("ddd, dd MMM yyy HH:mm")</dd>
-    }
-    else
-    {
-        <dd>@Model.DateValueField_3.Value.ToString("ddd, dd MMM yyy")</dd>
-    }
+    @if (Model.DateValueField_3.HasValue)
+        @if (Model.Collection.IsHasTime_3)
+        {
+            <dd>@Model.DateValueField_3.Value.ToString("ddd, dd MMM yyy HH:mm")</dd>
+        }
+        else
+        {
+            <dd>@Model.DateValueField_3.Value.ToString("ddd, dd MMM yyy")</dd>
+        }
 }
 
 @if (Model.Collection.BoolNameField_1 != null && Model.Collection.BoolNameField_1 != String.Empty)
 {
     <dt>@Model.Collection.BoolNameField_1:</dt>
-    @if (Model.BoolValueField_1.Value)
+        @if (Model.BoolValueField_1.HasValue && Model.BoolValueField_1.Value)
     {
         <dd>@Localizer["Yes"]</dd>
     }
@@ -131,7 +134,7 @@
 @if (Model.Collection.BoolNameField_2 != null && Model.Collection.BoolNameField_2 != String.Empty)
 {
     <dt>@Model.Collection.BoolNameField_2:</dt>
-    @if (Model.BoolValueField_2.Value)
+        @if (Model.BoolValueField_2.HasValue && Model.BoolValueField_2.Value)
     {
         <dd>@Localizer["Yes"]</dd>
     }
@@ -143,7 +146,7 @@
 @if (Model.Collection.BoolNameField_3 != null && Model.Collection.BoolNameField_3 != String.Empty)
 {
     <dt>@Model.Collection.BoolNameField_3:</dt>
-    @if (Model.BoolValueField_3.Value)
+        @if (Model.BoolValueField_3.HasValue && Model.BoolValueField_3.Value)
     {
         <dd>@Localizer["Yes"]</dd>
     }

@@ -2,8 +2,15 @@
 @inject IViewLocalizer Localizer
 @using CollectionKeeper.Entities
 @model MyCollectionsModel
+@if(Model.OwnerName == User.Identity.Name)
+{
+    <h2>@Localizer["HeadMy"]</h2>
+}
+else
+{
+    <h2>@Localizer["Head"] @Model.OwnerName</h2>
+}
 
-<h2>@Localizer["Head"], @Model.OwnerName</h2>
 <a asp-controller="Collection" asp-action="Create" asp-route-ownerName="@Model.OwnerName" class="btn btn-success">@Localizer["Add"]</a>
 <br />
 <div class="dropdown mt-3 mb-3">

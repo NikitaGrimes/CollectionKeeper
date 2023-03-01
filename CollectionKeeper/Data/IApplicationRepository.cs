@@ -10,6 +10,8 @@ namespace CollectionKeeper.Data
 
         public CollectionUser GetUserByName(string name);
 
+        public bool IsUserExist(string name);
+
         public bool RemoveUser(CollectionUser user);
 
         public bool BlockUserById(string id);

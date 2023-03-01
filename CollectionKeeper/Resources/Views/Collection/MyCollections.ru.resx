@@ -130,6 +130,9 @@
     <value>Фильтр</value>
   </data>
   <data name="Head" xml:space="preserve">
+    <value>Коллекции</value>
+  </data>
+  <data name="HeadMy" xml:space="preserve">
     <value>Ваши коллекции</value>
   </data>
   <data name="Name" xml:space="preserve">

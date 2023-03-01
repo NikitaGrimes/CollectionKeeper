@@ -148,3 +148,5 @@ C:\ILearning\CollectionKeeper\CollectionKeeper\obj\Debug\net6.0\CollectionKeeper
 C:\ILearning\CollectionKeeper\CollectionKeeper\obj\Debug\net6.0\CollectionKeeper.Resources.Models.RegisterModel.ru.resources
 C:\ILearning\CollectionKeeper\CollectionKeeper\obj\Debug\net6.0\CollectionKeeper.Resources.Views.Item.DeleteComment.en.resources
 C:\ILearning\CollectionKeeper\CollectionKeeper\obj\Debug\net6.0\CollectionKeeper.Resources.Views.Item.DeleteComment.ru.resources
+C:\ILearning\CollectionKeeper\CollectionKeeper\obj\Debug\net6.0\en\CollectionKeeper.resources.cs
+C:\ILearning\CollectionKeeper\CollectionKeeper\obj\Debug\net6.0\ru\CollectionKeeper.resources.cs

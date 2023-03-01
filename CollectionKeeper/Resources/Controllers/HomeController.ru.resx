@@ -123,6 +123,9 @@
   <data name="EmptyNameError" xml:space="preserve">
     <value>Имя не может быть пустым!</value>
   </data>
+  <data name="ExistError" xml:space="preserve">
+    <value>Пользователя с таким именем не существует.</value>
+  </data>
   <data name="FaildLogin" xml:space="preserve">
     <value>Ошибка при входе.</value>
   </data>

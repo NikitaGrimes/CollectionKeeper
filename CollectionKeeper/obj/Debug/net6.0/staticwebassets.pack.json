@@ -17,8 +17,20 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\ILearning\\CollectionKeeper\\CollectionKeeper\\wwwroot\\images\\1dd0a694-c124-4a33-8ed3-20d496b7384d.jpg",
+      "PackagePath": "staticwebassets\\images\\1dd0a694-c124-4a33-8ed3-20d496b7384d.jpg"
+    },
+    {
       "Id": "C:\\ILearning\\CollectionKeeper\\CollectionKeeper\\wwwroot\\images\\EmptyImageCollection.jpg",
       "PackagePath": "staticwebassets\\images\\EmptyImageCollection.jpg"
+    },
+    {
+      "Id": "C:\\ILearning\\CollectionKeeper\\CollectionKeeper\\wwwroot\\images\\c7881989-4a72-45e6-8df3-d3cdd75a773f.jpg",
+      "PackagePath": "staticwebassets\\images\\c7881989-4a72-45e6-8df3-d3cdd75a773f.jpg"
+    },
+    {
+      "Id": "C:\\ILearning\\CollectionKeeper\\CollectionKeeper\\wwwroot\\images\\e57c5a82-a99d-44f8-be8a-b7ec47c875da.png",
+      "PackagePath": "staticwebassets\\images\\e57c5a82-a99d-44f8-be8a-b7ec47c875da.png"
     },
     {
       "Id": "C:\\ILearning\\CollectionKeeper\\CollectionKeeper\\wwwroot\\js\\signalr\\dist\\browser\\signalr.js",

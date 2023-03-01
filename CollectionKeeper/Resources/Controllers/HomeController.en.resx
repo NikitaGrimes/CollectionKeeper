@@ -123,6 +123,9 @@
   <data name="EmptyNameError" xml:space="preserve">
     <value>Name should not be empty!</value>
   </data>
+  <data name="ExistError" xml:space="preserve">
+    <value>User with this name is not exist.</value>
+  </data>
   <data name="FaildLogin" xml:space="preserve">
     <value>Faild to login.</value>
   </data>

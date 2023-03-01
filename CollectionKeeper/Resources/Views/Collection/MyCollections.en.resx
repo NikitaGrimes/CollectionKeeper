@@ -130,6 +130,9 @@
     <value>Filter</value>
   </data>
   <data name="Head" xml:space="preserve">
+    <value>Collections</value>
+  </data>
+  <data name="HeadMy" xml:space="preserve">
     <value>Your collections</value>
   </data>
   <data name="Name" xml:space="preserve">

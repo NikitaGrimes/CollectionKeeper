@@ -171,6 +171,9 @@ namespace CollectionKeeper.Controllers
             List<Tag> itemTags = new List<Tag>();
             if (model.Tags != null)
             {
+                for (int i = 0; i < model.Tags.Count(); i++)
+                    model.Tags[i] = model.Tags[i].Replace(' ', '_');
+
                 foreach (string tag in model.Tags)
                 {
                     if (tag != null && !tagsNames.Contains(tag))
@@ -336,6 +339,9 @@ namespace CollectionKeeper.Controllers
             List<Tag> itemTags = new List<Tag>();
             if (model.Tags != null)
             {
+                for(int i = 0; i < model.Tags.Count(); i++)
+                    model.Tags[i] = model.Tags[i].Replace(' ', '_');
+
                 foreach (string tag in model.Tags)
                 {
                     if (tag != null && !tagsNames.Contains(tag))

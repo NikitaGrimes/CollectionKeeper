@@ -131,19 +131,40 @@
         @if (Model.Collection.BoolNameField_1 != null && Model.Collection.BoolNameField_1 != String.Empty)
         {
             <td>
-                <label>@Model.CollectionItems[i].BoolValueField_1</label>
+                @if (@Model.CollectionItems[i].BoolValueField_1.Value)
+                {
+                    <label>@Localizer["Yes"]</label>
+                }
+                else
+                {
+                    <label>@Localizer["No"]</label>
+                }
             </td>
         }
         @if (Model.Collection.BoolNameField_2 != null && Model.Collection.BoolNameField_2 != String.Empty)
         {
             <td>
-                <label>@Model.CollectionItems[i].BoolValueField_2</label>
+                @if (@Model.CollectionItems[i].BoolValueField_2.Value)
+                {
+                    <label>@Localizer["Yes"]</label>
+                }
+                else
+                {
+                    <label>@Localizer["No"]</label>
+                }
             </td>
         }
         @if (Model.Collection.BoolNameField_3 != null && Model.Collection.BoolNameField_3 != String.Empty)
         {
             <td>
-                <label>@Model.CollectionItems[i].BoolValueField_3</label>
+                @if (@Model.CollectionItems[i].BoolValueField_3.Value)
+                {
+                    <label>@Localizer["Yes"]</label>
+                }
+                else
+                {
+                    <label>@Localizer["No"]</label>
+                }
             </td>
         }
         <td>

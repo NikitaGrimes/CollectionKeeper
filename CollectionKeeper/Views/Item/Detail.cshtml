@@ -119,17 +119,38 @@
 @if (Model.Collection.BoolNameField_1 != null && Model.Collection.BoolNameField_1 != String.Empty)
 {
     <dt>@Model.Collection.BoolNameField_1:</dt>
-    <dd>@Model.BoolValueField_1</dd>
+    @if (Model.BoolValueField_1.Value)
+    {
+        <dd>@Localizer["Yes"]</dd>
+    }
+    else
+    {
+        <dd>@Localizer["No"]</dd>
+    }
 }
 @if (Model.Collection.BoolNameField_2 != null && Model.Collection.BoolNameField_2 != String.Empty)
 {
     <dt>@Model.Collection.BoolNameField_2:</dt>
-    <dd>@Model.BoolValueField_2</dd>
+    @if (Model.BoolValueField_2.Value)
+    {
+        <dd>@Localizer["Yes"]</dd>
+    }
+    else
+    {
+        <dd>@Localizer["No"]</dd>
+    }
 }
 @if (Model.Collection.BoolNameField_3 != null && Model.Collection.BoolNameField_3 != String.Empty)
 {
     <dt>@Model.Collection.BoolNameField_3:</dt>
-    <dd>@Model.BoolValueField_3</dd>
+    @if (Model.BoolValueField_3.Value)
+    {
+        <dd>@Localizer["Yes"]</dd>
+    }
+    else
+    {
+        <dd>@Localizer["No"]</dd>
+    }
 }
 </dl>
 @if (User.Identity.IsAuthenticated)
